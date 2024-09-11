@@ -10,13 +10,26 @@ public class EscolaMenu extends JFrame {
     ImageIcon formularios[];
     JPopupMenu opt;
     JMenuBar bars;
-    JMenu sobre, Ope, sair;
+    JMenu sobre, Forms, sair;
     JMenuItem Aluno, Prof, Turma, exit, sob, exitPopup, sobPopup;
+
+    SobrePag SobJanela;
+
     
     public EscolaMenu() {
         super("Menu");
         Container tela = getContentPane();
         tela.setLayout(null);
+
+        // Inicializa a matriz de ImageIcons com imagens válidas
+        formularios = new ImageIcon[4];
+        // Aqui você deve definir imagens válidas. 
+        // Exemplo de atribuição, você deve ter suas imagens no caminho correto.
+        formularios[0] = new ImageIcon("caminho/para/imagem1.png");
+        formularios[1] = new ImageIcon("caminho/para/imagem2.png");
+        formularios[2] = new ImageIcon("caminho/para/imagem3.png");
+        formularios[3] = new ImageIcon("caminho/para/imagem4.png");
+        
         // Barra de Ferramentas
         aluno = new JButton(formularios[0]);
         prof = new JButton(formularios[1]);
@@ -31,11 +44,12 @@ public class EscolaMenu extends JFrame {
         ferramentas.add(prof);
         ferramentas.add(turma);
         ferramentas.add(exi);
+
         // MenuBar
         bars = new JMenuBar();
         setJMenuBar(bars);
-        Ope = new JMenu("Formularios");
-        bars.add(Ope);
+        Forms = new JMenu("Formularios");
+        bars.add(Forms);
         sobre = new JMenu("Sobre");
         sair = new JMenu("Sair");
         bars.add(sobre);
@@ -44,7 +58,6 @@ public class EscolaMenu extends JFrame {
         Aluno = new JMenuItem("Aluno");
         Prof = new JMenuItem("Prof");
         Turma = new JMenuItem("Turma");
-
         exit = new JMenuItem("Sair");
         sob = new JMenuItem("Sobre");
 
@@ -60,9 +73,9 @@ public class EscolaMenu extends JFrame {
         opt.add(exitPopup);
         opt.add(sobPopup);
 
-        Ope.add(Aluno);
-        Ope.add(Prof);
-        Ope.add(Turma);
+        Forms.add(Aluno);
+        Forms.add(Prof);
+        Forms.add(Turma);
         tela.add(ferramentas);
         tela.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
@@ -72,7 +85,7 @@ public class EscolaMenu extends JFrame {
             }
         });
 
-        exitPopup.addActionListener(new ActionListener() {
+        exi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int pergunta = JOptionPane.showConfirmDialog(null, "Deseja fechar a janela?", "Mensagem saida", JOptionPane.YES_NO_OPTION);
                 if (pergunta == JOptionPane.YES_OPTION) {
@@ -81,10 +94,34 @@ public class EscolaMenu extends JFrame {
             }
         });
 
+        exit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int pergunta = JOptionPane.showConfirmDialog(null, "Deseja fechar a janela?", "Mensagem saida", JOptionPane.YES_NO_OPTION);
+                if (pergunta == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
+            }
+        });
+
+        sobPopup.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                SobJanela = new SobrePag(null, "Janela Sobre", true);
+                SobJanela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                SobJanela.setVisible(true);
+            }
+        });
+
+        sob.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                SobJanela = new SobrePag(null, "Janela Sobre", true);
+                SobJanela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                SobJanela.setVisible(true);
+            }
+        });
+
+
         setSize(600, 400);
         setVisible(true);
         setLocationRelativeTo(null);
     }
-
 }
-
