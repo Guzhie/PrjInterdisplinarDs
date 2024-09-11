@@ -50,6 +50,8 @@ public class LoginPag extends JFrame{
                     con_escolaMusica.executaSQL(pesquisa);
 
                     if (con_escolaMusica.resultset.first()) {
+                        EscolaMenu app = new EscolaMenu(); 
+                        app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         dispose();
                     }
                     else{

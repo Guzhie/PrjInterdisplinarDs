@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04/09/2024 às 02:21
--- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
+-- Tempo de geração: 04-Set-2024 às 19:56
+-- Versão do servidor: 10.4.22-MariaDB
+-- versão do PHP: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,13 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `bancosql`
 --
-
 create DATABASE `bancosql`;
 use `bancosql`;
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `aluno`
+-- Estrutura da tabela `acesso`
+--
+
+CREATE TABLE `acesso` (
+  `usuario` varchar(15) NOT NULL,
+  `senha` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `acesso`
+--
+
+INSERT INTO `acesso` (`usuario`, `senha`) VALUES
+('coordenador', 'clayton1'),
+('diretor', 'eupi1234');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `aluno`
 --
 
 CREATE TABLE `aluno` (
@@ -38,34 +56,34 @@ CREATE TABLE `aluno` (
   `cod_Aluno` int(11) NOT NULL,
   `endereco_Aluno` varchar(50) NOT NULL,
   `cep_Aluno` varchar(10) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `aluno_turma`
+-- Estrutura da tabela `aluno_turma`
 --
 
 CREATE TABLE `aluno_turma` (
   `cod_Aluno` int(11) NOT NULL,
   `Cod_turma` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `dif_instrumento`
+-- Estrutura da tabela `dif_instrumento`
 --
 
 CREATE TABLE `dif_instrumento` (
   `Descricao` varchar(40) NOT NULL,
   `Dif_instrumento` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `instrumento`
+-- Estrutura da tabela `instrumento`
 --
 
 CREATE TABLE `instrumento` (
@@ -73,12 +91,12 @@ CREATE TABLE `instrumento` (
   `Dif_instrumento` int(11) NOT NULL,
   `modelo_Instrumento` varchar(30) NOT NULL,
   `cod_Instrumeto` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `professor`
+-- Estrutura da tabela `professor`
 --
 
 CREATE TABLE `professor` (
@@ -90,36 +108,36 @@ CREATE TABLE `professor` (
   `cep_prof` varchar(10) NOT NULL,
   `endereco_prof` varchar(40) NOT NULL,
   `Id_Prof` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `sala`
+-- Estrutura da tabela `sala`
 --
 
 CREATE TABLE `sala` (
   `id_Sala` int(11) NOT NULL,
   `caps_Sala` int(11) NOT NULL,
   `Desc_Sala` varchar(30) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tipo_instrumento`
+-- Estrutura da tabela `tipo_instrumento`
 --
 
 CREATE TABLE `tipo_instrumento` (
   `Categ_instrumentos` varchar(20) NOT NULL,
   `Id_Prof` int(11) NOT NULL,
   `cod_Instrumeto` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `turma`
+-- Estrutura da tabela `turma`
 --
 
 CREATE TABLE `turma` (
@@ -128,14 +146,20 @@ CREATE TABLE `turma` (
   `id_Sala` int(11) NOT NULL,
   `Turno` varchar(11) NOT NULL,
   `Serie` char(2) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices de tabela `aluno`
+-- Índices para tabela `acesso`
+--
+ALTER TABLE `acesso`
+  ADD PRIMARY KEY (`usuario`);
+
+--
+-- Índices para tabela `aluno`
 --
 ALTER TABLE `aluno`
   ADD PRIMARY KEY (`cod_Aluno`),
@@ -143,20 +167,20 @@ ALTER TABLE `aluno`
   ADD UNIQUE KEY `email_Aluno` (`email_Aluno`);
 
 --
--- Índices de tabela `dif_instrumento`
+-- Índices para tabela `dif_instrumento`
 --
 ALTER TABLE `dif_instrumento`
   ADD PRIMARY KEY (`Dif_instrumento`);
 
 --
--- Índices de tabela `instrumento`
+-- Índices para tabela `instrumento`
 --
 ALTER TABLE `instrumento`
   ADD PRIMARY KEY (`cod_Instrumeto`),
   ADD UNIQUE KEY `modelo_Instrumento` (`modelo_Instrumento`);
 
 --
--- Índices de tabela `professor`
+-- Índices para tabela `professor`
 --
 ALTER TABLE `professor`
   ADD PRIMARY KEY (`Id_Prof`),
@@ -165,19 +189,19 @@ ALTER TABLE `professor`
   ADD UNIQUE KEY `telefone_Prof` (`telefone_Prof`);
 
 --
--- Índices de tabela `sala`
+-- Índices para tabela `sala`
 --
 ALTER TABLE `sala`
   ADD PRIMARY KEY (`id_Sala`);
 
 --
--- Índices de tabela `turma`
+-- Índices para tabela `turma`
 --
 ALTER TABLE `turma`
   ADD PRIMARY KEY (`Cod_turma`);
 
 --
--- AUTO_INCREMENT para tabelas despejadas
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --

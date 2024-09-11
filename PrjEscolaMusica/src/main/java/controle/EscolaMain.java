@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class EscolaMain {
     public static void main(String[] args) {
-        LoginPag app = new LoginPag(); 
+        EscolaMenu app = new EscolaMenu(); 
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
